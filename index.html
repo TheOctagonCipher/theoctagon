@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Octagon Cipher</title>
+  <link rel="icon" href="./octagon.png">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden !important;
+      background-color: #121212;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .container {
+      height: 100vh;
+      position: relative;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 2s ease;
+    }
+
+    .container2 {
+      height: 100vh;
+      position: relative;
+      text-align: center;
+    }
+
+    .imageContainer {
+      position: relative;
+      top: 20vh;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .rotating-image {
+      animation: rotate 8s linear infinite;
+      width: 20vw;
+      min-width: 250px;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .fade-text {
+      font-size: 4rem;
+      opacity: 0;
+      transition: opacity 2s ease;
+      display: none;
+    }
+
+    .second-div-content {
+      text-align: center;
+    }
+
+    .second-div-content img {
+      margin-top: 20vh;
+      width: 20vw;
+      min-width: 300px;
+    }
+
+    .second-div-content h1 {
+      margin-top: 20px;
+      font-size: 3em;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #2d2d2d;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 1000;
+      transition: opacity 1s ease;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .overlay img {
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      width: 20vw;
+      min-width: 250px;
+    }
+
+
+    .mobile-message {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      background-color: black;
+      color: white;
+      font-size: 1.5rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 2000;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .mobile-message {
+        display: flex;
+      }
+
+
+      body>*:not(.mobile-message) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="mobile-message">Open on a laptop for better experience.</div>
+
+  <div class="overlay" id="overlay">
+    <div><img src="./octagon.png" alt=""></div>
+  </div>
+
+  <div class="container" id="div1">
+    <div class="imageContainer">
+      <img class="rotating-image" src="./octagon.png" alt="Loading Icon">
+      <h1 class="fade-text" id="text1">Have you tried looking beyond?</h1>
+      <h1 class="fade-text" id="text2">Look for what's !important.</h1>
+      <h1 class="fade-text" id="text3">Have you visited the core?<br>Answers are found deep within.</h1>
+      <h1 class="fade-text" id="text4">Bodies are usually buried deep down.</h1>
+      <h1 class="fade-text" id="text5">Go to hell.</h1>
+    </div>
+  </div>
+
+  <div class="container2" id="div2" style="display:none !important;">
+    <div class="second-div-content">
+      <img class="code" src="./qrf.png"
+        alt="There might be more than what meets the eye... or in this case, the camera">
+      <h1>Almost there...<br> Now go all the way to hell's end and back</h1>
+    </div>
+  </div>
+
+  <audio id="background-audio" loop>
+    <source src="./Take Care (ULTRAKILL_ INFINITE HYPERDEATH).mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    <!-- !important if asked for a password; It's the day of our creation DDMMYYYY-->
+  </audio>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const div1 = document.getElementById('div1');
+    const audio = document.getElementById('background-audio');
+    const texts = [
+      document.getElementById('text1'),
+      document.getElementById('text2'),
+      document.getElementById('text3'),
+      document.getElementById('text4'),
+      document.getElementById('text5')
+    ];
+    let index = 0;
+
+    function changeText() {
+      texts[index].style.opacity = 0;
+      texts[index].style.display = 'none';
+      index = (index + 1) % texts.length;
+      setTimeout(() => {
+        texts[index].style.display = 'block';
+        setTimeout(() => {
+          texts[index].style.opacity = 1;
+        }, 100);
+      }, 2000);
+    }
+
+    texts[0].style.display = 'block';
+    texts[0].style.opacity = 1;
+
+    setInterval(changeText, 6000);
+
+    overlay.addEventListener('click', function () {
+      overlay.classList.add('hidden');
+      div1.style.opacity = 1;
+      audio.play();
+    });
+  </script>
+
+</body>
+
+</html>
